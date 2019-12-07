@@ -1,0 +1,32 @@
+influx-url = "http://localhost:8086"
+influx-skip-verify = true
+influx-auto-create-db = true
+influx-clients = 10
+
+mongo-url = "mongodb://localhost:27017"
+
+replay = false
+# process all events from the beginning of the oplog
+
+resume = false
+# save the timestamps of processed events for resuming later
+
+resume-strategy = 1
+# use 0, default, for timestamps (MongoDB 4+) or use 1 for tokens (MongoDB 3.6+)
+
+resume-name = "tomodex"
+
+verbose = true
+
+change-streams = true
+
+direct-reads = true
+# read events directly out of mongodb collections in addition to tailing the oplog
+
+exit-after-direct-reads = false
+
+[[measurement]]
+namespace = "tomodex.trades"
+fields = ["hash", "amount"]
+timefield = "createdAt"
+precision = "ms"
